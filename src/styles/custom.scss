@@ -1,0 +1,11 @@
+$theme-colors: (
+  'success': #1cc88a
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.btn {
+  &:focus, &:active {
+    box-shadow: none;
+  }
+}
