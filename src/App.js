@@ -14,7 +14,7 @@ function App() {
         </div>
 
         <div className="d-flex justify-content-center mt-4">
-          <button className="btn btn-sm btn-success">
+          <button className="btn btn-sm btn-info">
             Get Started
           </button>
         </div>

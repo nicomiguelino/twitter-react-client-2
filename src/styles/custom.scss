@@ -1,5 +1,12 @@
 $theme-colors: (
-  'success': #1cc88a
+  'primary': #4e73df,
+  'success': #1cc88a,
+  'info': #36b9cc,
+  'warning': #f6c23e,
+  'danger': #e74a3b,
+  'secondary': #858796,
+  'light': #f8f9fc,
+  'dark': #5a5c69,
 );
 
 @import '~bootstrap/scss/bootstrap.scss';
