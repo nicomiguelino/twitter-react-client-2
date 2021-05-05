@@ -15,7 +15,10 @@ function Navigation() {
         href="#home"
         className="mr-4"
       >
-        <strong>Twitter Clone</strong>
+        <strong className="d-block">
+          Yet another Twitter clone
+        </strong>
+        <small className="d-block">It's like Twitter, but green.</small>
       </Navbar.Brand>
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
