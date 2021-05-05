@@ -30,7 +30,13 @@ const initialState = [
 export const tweetsSlice = createSlice({
   name: 'tweets',
   initialState,
-  reducers: {},
+  reducers: {
+    createTweet: (state, action) => {
+      state.unshift(action.payload);
+    },
+  },
 });
+
+export const { createTweet } = tweetsSlice.actions;
 
 export default tweetsSlice.reducer;

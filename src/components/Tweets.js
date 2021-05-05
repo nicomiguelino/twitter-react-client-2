@@ -1,5 +1,13 @@
 import { useSelector } from 'react-redux';
 
+function getProcessedTweet(content) {
+  return `${content}`.split('\n').map(line => (
+    <span>
+      {line}<br/>
+    </span>
+  ));
+}
+
 function Tweets() {
   const tweets = useSelector(state => state.tweets);
 
@@ -8,7 +16,7 @@ function Tweets() {
       {tweets.map(tweet => (
         <div className="card bg-white text-black mb-2">
           <div className="card-body">
-            <div>
+            <div className="mb-2">
               <span className="font-weight-bold mr-1">
                 {tweet.displayName}
               </span>
@@ -17,7 +25,7 @@ function Tweets() {
               </span>
             </div>
             <div>
-              {tweet.content}
+              {getProcessedTweet(tweet.content)}
             </div>
           </div>
         </div>
