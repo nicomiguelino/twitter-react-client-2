@@ -23,7 +23,7 @@ function Navigation() {
       <Navbar.Collapse
         id="basic-navbar-nav"
       >
-        <Nav className="ml-auto">
+        <Nav className="ml-auto mt-3 mt-lg-0">
           <Nav.Link href="#">Profile</Nav.Link>
           <Nav.Link href="#">Notifications</Nav.Link>
         </Nav>

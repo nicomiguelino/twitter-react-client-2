@@ -28,9 +28,9 @@ let tweets = [
 
 function Feed() {
   return(
-    <div class="container-lg mt-5">
+    <div class="container-md mt-5">
       <div class="row">
-        <div className="col-lg-8 col-sm-12">
+        <div className="col-12 col-lg-8">
           {
             tweets.map(tweet => (
               <div className="card bg-white text-black mb-2">
@@ -52,7 +52,7 @@ function Feed() {
           }
         </div>
 
-        <div className="col-lg-4 d-none d-md-block">
+        <div className="col-lg-4 d-none d-lg-block">
           <div className="sticky-top" style={{top: "6.5em"}}>
             <h5 className="text-black-30 font-weight-bold">
               Trending
