@@ -1,3 +1,6 @@
+import Tweet from "./Tweets";
+import Trending from "./Trending";
+
 let trendingTags = [
   "FreeMassTestingPH",
   "ShopeeCashbackTuesday",
@@ -31,41 +34,11 @@ function Feed() {
     <div class="container-md mt-5">
       <div class="row">
         <div className="col-12 col-lg-8">
-          {
-            tweets.map(tweet => (
-              <div className="card bg-white text-black mb-2">
-                <div className="card-body">
-                  <div>
-                    <span className="font-weight-bold mr-1">
-                      {tweet.displayName}
-                    </span>
-                    <span className="text-black-50">
-                      @{tweet.userName} &middot; {tweet.timeElapsed}
-                    </span>
-                  </div>
-                  <div>
-                    {tweet.content}
-                  </div>
-                </div>
-              </div>
-            ))
-          }
+          <Tweet tweets={tweets} />
         </div>
 
         <div className="col-lg-4 d-none d-lg-block">
-          <div className="sticky-top" style={{top: "6.5em"}}>
-            <h5 className="text-black-30 font-weight-bold">
-              Trending
-            </h5>
-
-            {
-              trendingTags.map(tag => (
-                <div className="text-black-50 font-weight-bold">
-                  #{tag}
-                </div>
-              ))
-            }
-          </div>
+          <Trending tags={trendingTags} />
         </div>
       </div>
     </div>
