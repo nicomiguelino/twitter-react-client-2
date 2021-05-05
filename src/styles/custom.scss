@@ -16,3 +16,12 @@ $theme-colors: (
     box-shadow: none;
   }
 }
+
+.form-control {
+  border-width: -2px;
+
+  &:focus {
+    box-shadow: none;
+    border-color: #1cc88a;
+  }
+}

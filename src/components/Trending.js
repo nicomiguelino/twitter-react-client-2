@@ -1,6 +1,6 @@
 function Trending({tags}) {
   return (
-    <div className="sticky-top" style={{top: "6.5em"}}>
+    <div className="sticky-top" style={{top: "9em"}}>
       <h5 className="text-black-30 font-weight-bold">
         Trending
       </h5>
