@@ -1,6 +1,8 @@
+import '../styles/CreateTweetForm.scss';
+
 function CreateTweetForm() {
   return (
-        <div class="form-group mb-5">
+        <div class="form-group mb-5 CreateTweetForm">
           <textarea
             id="create-tweet"
             placeholder="What's happening?"
