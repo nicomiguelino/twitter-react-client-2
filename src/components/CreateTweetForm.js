@@ -14,7 +14,7 @@ function CreateTweetForm() {
           >
           </textarea>
 
-          <div className="d-flex flex-row">
+          <div className="d-flex flex-row align-items-start">
             <span className="text-black-50 ml-2">
               280/280
             </span>

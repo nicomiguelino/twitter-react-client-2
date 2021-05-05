@@ -1,4 +1,8 @@
-function Tweets({tweets}) {
+import { useSelector } from 'react-redux';
+
+function Tweets() {
+  const tweets = useSelector(state => state.tweets);
+
   return (
     <>
       {tweets.map(tweet => (

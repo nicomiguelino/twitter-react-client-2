@@ -1,4 +1,8 @@
-function Trending({tags}) {
+import { useSelector } from 'react-redux';
+
+function Trending() {
+  const tags = useSelector(state => state.trendingTags);
+
   return (
     <div className="sticky-top" style={{top: "9em"}}>
       <h5 className="text-black-30 font-weight-bold">
