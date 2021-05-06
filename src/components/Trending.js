@@ -9,13 +9,11 @@ function Trending() {
         Trending
       </h5>
 
-      {
-        tags.map(tag => (
-          <div className="text-black-50 font-weight-bold">
-            #{tag}
-          </div>
-        ))
-      }
+      {tags.map(tag => (
+        <div className="text-black-50 font-weight-bold">
+          #{tag}
+        </div>
+      ))}
     </div>
   );
 }
