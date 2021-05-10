@@ -4,7 +4,7 @@ import '../styles/CreateTweetForm.scss';
 import { createTweet } from '../redux/tweets/tweetsSlice';
 
 function validateTweet(tweet) {
-  const trimmedTweet = `$(tweet)`.trim();
+  const trimmedTweet = `${tweet}`.trim();
   return trimmedTweet.length !== 0;
 }
 

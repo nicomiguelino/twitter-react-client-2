@@ -35,6 +35,10 @@ function Navigation() {
           <NavLink to="/notifications" className="nav-link">
             Notifications
           </NavLink>
+
+          <NavLink to="/login" className="nav-link">
+            Log Out
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

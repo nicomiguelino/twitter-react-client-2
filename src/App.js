@@ -7,8 +7,9 @@ import {
 } from 'react-router-dom';
 
 import './App.scss';
-import Navigation from './components/Navigation';
 import Feed from './components/Feed';
+import LoginForm from './components/LoginForm';
+import Navigation from './components/Navigation';
 
 const middot = '\u00b7';
 
@@ -30,9 +31,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/login">
-            <div className="container-fluid d-flex justify-content-center mt-5">
-              <h3>Login page is still a work in progress.</h3>
-            </div>
+            <LoginForm />
           </Route>
 
           <Route>
