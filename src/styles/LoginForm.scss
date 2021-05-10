@@ -1,0 +1,27 @@
+$border-radius: 2rem;
+
+.LoginForm {
+  min-height: 100vh;
+  height: 100vh;
+
+  .login-form {
+    border-radius: 10px !important;
+    padding: 2.5rem !important;
+
+    label {
+      color: #808080;
+    }
+
+    .form-control {
+      border-radius: $border-radius;
+    }
+
+    .input-group-text {
+      border-radius: 0px $border-radius $border-radius 0px;
+    }
+  }
+
+  .login-button {
+    border-radius: $border-radius;
+  }
+}
