@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles/LoginForm.scss';
@@ -17,13 +18,29 @@ function LoginForm() {
 
   return (
     <div className="LoginForm container-fluid bg-success">
-      <div className="d-flex justify-content-center align-items-center h-100">
+      <div
+        className={classNames(
+          'd-flex',
+          'justify-content-center',
+          'align-items-center',
+          'h-100',
+        )}
+      >
         <form className="login-form bg-white rounded" action="">
           <div className="mb-5">
+            <h3 className={classNames(
+              'text-center',
+              'text-success',
+              'display-4',
+            )}>
+              <i className="bi-twitter"></i>
+            </h3>
             <h3 className="text-center text-success mb-1">
               Yet another Twitter clone
             </h3>
-            <h6 className="text-center text-black-50">It's like Twitter, but green.</h6>
+            <h6 className="text-center text-black-50">
+              It's like Twitter, but green.
+            </h6>
           </div>
 
           <div className="form-group">
@@ -37,7 +54,7 @@ function LoginForm() {
           </div>
 
           <div className="form-group">
-            <div class="input-group">
+            <div className="input-group">
               <input
                 className="form-control p-3"
                 type={passwordHidden ? "password": "text"}
@@ -48,7 +65,7 @@ function LoginForm() {
 
               <div className="input-group-append">
                 <span
-                  className="input-group-text"
+                  className="input-group-text pr-3"
                   onClick={handlePasswordToggle}
                 >
                   {
@@ -62,7 +79,14 @@ function LoginForm() {
           </div>
 
           <button
-            className="btn btn-success w-100 login-button font-weight-bold mt-4"
+            className={classNames(
+              'btn',
+              'btn-success',
+              'w-100',
+              'login-button',
+              'font-weight-bold',
+              'mt-4',
+            )}
             onClick={handleLogin}
           >
             Log In

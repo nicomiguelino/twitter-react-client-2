@@ -1,7 +1,5 @@
-import {
-  Navbar, Nav
-} from "react-bootstrap";
-
+import classNames from 'classnames';
+import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink } from 'react-router-dom';
 
 function Navigation() {
@@ -11,7 +9,12 @@ function Navigation() {
       variant="dark"
       expand="lg"
       sticky="top"
-      className="mb-5 py-3 px-lg-5 px-4"
+      className={classNames(
+        'mb-5',
+        'py-3',
+        'px-lg-5',
+        'px-4',
+      )}
     >
       <Link to="/" className="mr-4 navbar-brand">
         <strong className="d-block">
@@ -27,7 +30,13 @@ function Navigation() {
       <Navbar.Collapse
         id="basic-navbar-nav"
       >
-        <Nav className="ml-auto mt-3 mt-lg-0">
+        <Nav
+          className={classNames(
+            'ml-auto',
+            'mt-3',
+            'mt-lg-0',
+          )}
+        >
           <NavLink to="/profile" className="nav-link">
             Profile
           </NavLink>

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import '../styles/CreateTweetForm.scss';
@@ -38,7 +39,13 @@ function CreateTweetForm() {
   };
 
   return (
-        <div class="form-group mb-5 CreateTweetForm">
+        <div
+          className={classNames(
+            'CreateTweetForm',
+            'form-group',
+            'mb-5',
+          )}
+        >
           <textarea
             id="create-tweet"
             placeholder="What's happening?"
@@ -53,7 +60,13 @@ function CreateTweetForm() {
             onChange={handleInputTweet}
           />
 
-          <div className="d-flex flex-row align-items-start">
+          <div
+            className={classNames(
+              'd-flex',
+              'flex-row',
+              'align-items-start',
+            )}
+          >
             <span className="text-black-50 ml-2">
               280/280
             </span>
