@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../styles/CreateTweetForm.scss';
 import { createTweet } from '../redux/tweets/tweetsSlice';
 
@@ -9,8 +9,23 @@ function validateTweet(tweet) {
   return trimmedTweet.length !== 0;
 }
 
+function Spinner({loading}) {
+  if (loading) {
+    return (
+      <span class="spinner-border spinner-border-sm ml-2">
+      </span>
+    );
+  } else {
+    return (
+      <></>
+    );
+  }
+};
+
 function CreateTweetForm() {
   const dispatch = useDispatch();
+  const createTweetLoading = useSelector(
+    state => state.tweets.createTweetLoading);
   const [inputTweet, setInputTweet] = useState('');
   const [tweetButtonDisabled, setTweetButtonDisabled] = useState(true);
 
@@ -74,9 +89,12 @@ function CreateTweetForm() {
             <button
               className="btn btn-success rounded ml-auto"
               onClick={handleCreateTweet}
-              disabled={tweetButtonDisabled}
+              disabled={tweetButtonDisabled || createTweetLoading}
             >
-              <strong>Tweet</strong>
+              <div className="d-flex align-items-center">
+                <strong>Tweet</strong>
+                <Spinner loading={createTweetLoading} />
+              </div>
             </button>
           </div>
         </div>

@@ -13,7 +13,7 @@ function Tweets() {
 
   return (
     <>
-      {tweets.map(tweet => (
+      {tweets.list.map(tweet => (
         <div className="card bg-white text-black mb-2">
           <div className="card-body">
             <div className="mb-2">
