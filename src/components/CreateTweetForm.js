@@ -85,7 +85,12 @@ function CreateTweetForm() {
               'align-items-start',
             )}
           >
-            <span className="text-black-50 ml-2">
+            <span
+              className={classNames(
+                'ml-2',
+                (charactersLeft < 0) ? 'text-danger' : 'text-black-50',
+              )}
+            >
               {charactersLeft}/{maxCharPerTweet}
             </span>
 
