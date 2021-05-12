@@ -30,7 +30,7 @@ function CreateTweetForm() {
   const {
     createTweetLoading,
     inputTweet,
-    tweetButtonDisabled
+    tweetButtonDisabled,
   } = useSelector(state => state.tweets);
 
   const handleCreateTweet = () => {
