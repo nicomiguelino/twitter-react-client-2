@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+export const maxCharPerTweet = 200;
+
 const initialState = {
   inputTweet: '',
+  charactersLeft: maxCharPerTweet,
   tweetButtonDisabled: true,
   createTweetLoading: false,
   list: [
@@ -53,15 +56,20 @@ export const tweetsSlice = createSlice({
     setTweetButtonDisabled: (state, action) => {
       state.tweetButtonDisabled = action.payload;
     },
+    updateCharactersLeft: (state) => {
+      state.charactersLeft = maxCharPerTweet -
+        `${state.inputTweet}`.trim().length;
+    },
   },
   extraReducers: {
     [createTweet.pending]: (state) => {
       state.createTweetLoading = true;
     },
     [createTweet.fulfilled]: (state, action) => {
+      state.list.unshift(action.payload);
       state.createTweetLoading = false;
       state.inputTweet = '';
-      state.list.unshift(action.payload);
+      state.charactersLeft = maxCharPerTweet;
     },
   },
 });
@@ -69,6 +77,7 @@ export const tweetsSlice = createSlice({
 export const {
   setInputTweet ,
   setTweetButtonDisabled,
+  updateCharactersLeft,
 } = tweetsSlice.actions;
 
 export default tweetsSlice.reducer;

@@ -5,11 +5,13 @@ import {
   createTweet,
   setInputTweet,
   setTweetButtonDisabled,
+  updateCharactersLeft,
+  maxCharPerTweet,
 } from '../redux/tweets/tweetsSlice';
 
 function validateTweet(tweet) {
   const trimmedTweet = `${tweet}`.trim();
-  return trimmedTweet.length !== 0;
+  return trimmedTweet.length > 0 && trimmedTweet.length <= maxCharPerTweet;
 }
 
 function Spinner({loading}) {
@@ -31,6 +33,7 @@ function CreateTweetForm() {
     createTweetLoading,
     inputTweet,
     tweetButtonDisabled,
+    charactersLeft,
   } = useSelector(state => state.tweets);
 
   const handleCreateTweet = () => {
@@ -49,6 +52,7 @@ function CreateTweetForm() {
 
     dispatch(setTweetButtonDisabled(!validateTweet(tweet)));
     dispatch(setInputTweet(tweet));
+    dispatch(updateCharactersLeft());
   };
 
   return (
@@ -82,7 +86,7 @@ function CreateTweetForm() {
             )}
           >
             <span className="text-black-50 ml-2">
-              280/280
+              {charactersLeft}/{maxCharPerTweet}
             </span>
 
             <button
