@@ -6,9 +6,6 @@
   textarea {
     border-width: 2px;
 
-    &:focus, &:active {
-    }
-
     &:disabled {
       background-color: inherit;
       opacity: 0.7;
