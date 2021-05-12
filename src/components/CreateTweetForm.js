@@ -1,8 +1,11 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/CreateTweetForm.scss';
-import { createTweet } from '../redux/tweets/tweetsSlice';
+import {
+  createTweet,
+  setInputTweet,
+  setTweetButtonDisabled,
+} from '../redux/tweets/tweetsSlice';
 
 function validateTweet(tweet) {
   const trimmedTweet = `${tweet}`.trim();
@@ -24,15 +27,11 @@ function Spinner({loading}) {
 
 function CreateTweetForm() {
   const dispatch = useDispatch();
-  const createTweetLoading = useSelector(
-    state => state.tweets.createTweetLoading);
-  const [inputTweet, setInputTweet] = useState('');
-  const [tweetButtonDisabled, setTweetButtonDisabled] = useState(true);
-
-  const resetForm = () => {
-    setInputTweet('');
-    setTweetButtonDisabled(true);
-  };
+  const {
+    createTweetLoading,
+    inputTweet,
+    tweetButtonDisabled
+  } = useSelector(state => state.tweets);
 
   const handleCreateTweet = () => {
     const tweet = {
@@ -43,14 +42,13 @@ function CreateTweetForm() {
     };
 
     dispatch(createTweet(tweet));
-    resetForm();
   };
 
   const handleInputTweet = (event) => {
     const tweet = event.target.value;
 
-    setTweetButtonDisabled(!validateTweet(tweet));
-    setInputTweet(tweet);
+    dispatch(setTweetButtonDisabled(!validateTweet(tweet)));
+    dispatch(setInputTweet(tweet));
   };
 
   return (
@@ -73,6 +71,7 @@ function CreateTweetForm() {
             }}
             value={inputTweet}
             onChange={handleInputTweet}
+            disabled={createTweetLoading}
           />
 
           <div

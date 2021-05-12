@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
+  inputTweet: '',
+  tweetButtonDisabled: true,
   createTweetLoading: false,
   list: [
     {
@@ -44,16 +46,29 @@ export const createTweet = createAsyncThunk(
 export const tweetsSlice = createSlice({
   name: 'tweets',
   initialState,
-  reducers: {},
+  reducers: {
+    setInputTweet: (state, action) => {
+      state.inputTweet = action.payload;
+    },
+    setTweetButtonDisabled: (state, action) => {
+      state.tweetButtonDisabled = action.payload;
+    },
+  },
   extraReducers: {
     [createTweet.pending]: (state) => {
       state.createTweetLoading = true;
     },
     [createTweet.fulfilled]: (state, action) => {
       state.createTweetLoading = false;
+      state.inputTweet = '';
       state.list.unshift(action.payload);
     },
   },
 });
+
+export const {
+  setInputTweet ,
+  setTweetButtonDisabled,
+} = tweetsSlice.actions;
 
 export default tweetsSlice.reducer;
