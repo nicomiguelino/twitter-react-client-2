@@ -1,3 +1,8 @@
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import {
+  getTweets,
+} from '../redux/tweets/tweetsSlice';
 import { useSelector } from 'react-redux';
 
 function getProcessedTweet(content) {
@@ -10,6 +15,11 @@ function getProcessedTweet(content) {
 
 function Tweets() {
   const tweets = useSelector(state => state.tweets);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTweets());
+  }, [dispatch]);
 
   return (
     <>
