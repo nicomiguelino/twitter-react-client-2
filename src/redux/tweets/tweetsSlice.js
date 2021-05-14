@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { apiClient } from '../../utilities/clientApi';
 
 export const maxCharPerTweet = 200;
 
@@ -27,7 +27,7 @@ export const getTweets = createAsyncThunk(
   'tweets/get',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('http://localhost:4000/tweets')
+      const response = await apiClient.get('/tweets')
       return response.data;
     } catch(error) {
       return thunkAPI.rejectWithValue({
