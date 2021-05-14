@@ -14,16 +14,25 @@ function getProcessedTweet(content) {
 }
 
 function Tweets() {
-  const tweets = useSelector(state => state.tweets);
+  const { list, tweetsLoading } = useSelector(state => state.tweets);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTweets());
   }, [dispatch]);
 
+  if (tweetsLoading) {
+    return (
+      <div class="bg-white text-black-50 text-center">
+          <span className="spinner-border spinner-border-sm">
+          </span>
+      </div>
+    );
+  }
+
   return (
     <>
-      {tweets.list.map(tweet => (
+      {list.map(tweet => (
         <div className="card bg-white text-black mb-2">
           <div className="card-body">
             <div className="mb-2">

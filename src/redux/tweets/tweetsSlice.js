@@ -8,6 +8,7 @@ const initialState = {
   charactersLeft: maxCharPerTweet,
   tweetButtonDisabled: true,
   createTweetLoading: false,
+  tweetsLoading: true,
   list: []
 };
 
@@ -26,7 +27,6 @@ export const getTweets = createAsyncThunk(
   'tweets/get',
   async (_, thunkAPI) => {
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
       const response = await axios.get('http://localhost:4000/tweets')
       return response.data;
     } catch(error) {
@@ -63,11 +63,13 @@ export const tweetsSlice = createSlice({
       state.charactersLeft = maxCharPerTweet;
     },
     [getTweets.pending]: (state) => {
+      state.tweetsLoading = true;
     },
     [getTweets.fulfilled]: (state, action) => {
       state.list = [...action.payload];
-    },
-  },
+      state.tweetsLoading = false;
+    }
+  }
 });
 
 export const {
