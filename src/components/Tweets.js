@@ -1,3 +1,8 @@
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import {
+  getTweets,
+} from '../redux/tweets/tweetsSlice';
 import { useSelector } from 'react-redux';
 
 function getProcessedTweet(content) {
@@ -9,11 +14,26 @@ function getProcessedTweet(content) {
 }
 
 function Tweets() {
-  const tweets = useSelector(state => state.tweets);
+  const { list, tweetsLoading } = useSelector(state => state.tweets);
+  const { accessToken } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTweets(accessToken));
+  }, [dispatch, accessToken]);
+
+  if (tweetsLoading) {
+    return (
+      <div class="bg-white text-black-50 text-center">
+          <span className="spinner-border">
+          </span>
+      </div>
+    );
+  }
 
   return (
     <>
-      {tweets.list.map(tweet => (
+      {list.map(tweet => (
         <div className="card bg-white text-black mb-2">
           <div className="card-body">
             <div className="mb-2">
@@ -21,7 +41,7 @@ function Tweets() {
                 {tweet.displayName}
               </span>
               <span className="text-black-50">
-                @{tweet.userName} &middot; {tweet.timeElapsed}
+                @{tweet.username} &middot; {tweet.timeElapsed}
               </span>
             </div>
             <div>

@@ -38,7 +38,7 @@ function CreateTweetForm() {
 
   const handleCreateTweet = () => {
     const tweet = {
-      userName: 'anonymouspanda',
+      username: 'anonymouspanda',
       displayName: 'The Panda',
       timeElapsed: '1d',
       content: `${inputTweet}`.trim(),

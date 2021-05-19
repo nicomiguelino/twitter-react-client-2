@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { apiClient } from '../../utilities/apiClient';
 
 export const maxCharPerTweet = 200;
 
@@ -7,32 +8,8 @@ const initialState = {
   charactersLeft: maxCharPerTweet,
   tweetButtonDisabled: true,
   createTweetLoading: false,
-  list: [
-    {
-      userName: 'anthonyedwardstark',
-      displayName: 'Tony Stark',
-      timeElapsed: '4h',
-      content: 'Time to upgrade my Mark V.',
-    },
-    {
-      userName: 'peterparker',
-      displayName: 'Peter Parker',
-      timeElapsed: '23s',
-      content: 'I\'m super excited on my first day at the Stark internship.',
-    },
-    {
-      userName: 'brucebanner',
-      displayName: 'Hulk',
-      timeElapsed: '4h',
-      content: 'Gotta go to dinner date with Nat.',
-    },
-    {
-      userName: 'samwilson',
-      displayName: 'The Falcon',
-      timeElapsed: '1d',
-      content: 'Gotta go fast to get that shield back.',
-    },
-  ]
+  tweetsLoading: true,
+  list: []
 };
 
 export const createTweet = createAsyncThunk(
@@ -43,6 +20,24 @@ export const createTweet = createAsyncThunk(
     );
 
     return response.data;
+  }
+);
+
+export const getTweets = createAsyncThunk(
+  'tweets/get',
+  async (accessToken, thunkAPI) => {
+    try {
+      const response = await apiClient.get('/tweets', {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        },
+      })
+      return response.data;
+    } catch(error) {
+      return thunkAPI.rejectWithValue({
+        error: error.message
+      });
+    }
   }
 );
 
@@ -71,7 +66,14 @@ export const tweetsSlice = createSlice({
       state.inputTweet = '';
       state.charactersLeft = maxCharPerTweet;
     },
-  },
+    [getTweets.pending]: (state) => {
+      state.tweetsLoading = true;
+    },
+    [getTweets.fulfilled]: (state, action) => {
+      state.list = [...action.payload];
+      state.tweetsLoading = false;
+    }
+  }
 });
 
 export const {

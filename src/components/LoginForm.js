@@ -1,19 +1,65 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import '../styles/LoginForm.scss';
+import { apiClient } from '../utilities/apiClient';
+import { setAccessToken } from '../redux/auth/authSlice';
+
+function LoginErrorMessage({visible, message}) {
+  if (visible) {
+    return (
+      <div
+        className={classNames(
+          'd-flex',
+          'text-danger',
+          'justify-content-center',
+        )}
+      >
+        {message}
+      </div>
+    );
+  } else {
+    return <></>
+  }
+}
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const [passwordHidden, setPasswordHidden] = useState(true);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [loginError, setLoginError] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   const handlePasswordToggle = () => {
     setPasswordHidden(!passwordHidden);
   };
 
-  const handleLogin = () => {
-    history.push('/');
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await apiClient.post('/login', { username, password });
+      setLoginError(false);
+      dispatch(setAccessToken(response.data.token));
+      history.push('/');
+    } catch(error) {
+      setLoginError(true);
+      setLoginErrorMessage(error.response.data.message);
+    }
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   return (
@@ -50,6 +96,8 @@ function LoginForm() {
               name="username"
               id="username"
               placeholder="Username"
+              value={username}
+              onChange={handleUsernameChange}
             />
           </div>
 
@@ -61,6 +109,8 @@ function LoginForm() {
                 name="password"
                 id="password"
                 placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
               />
 
               <div className="input-group-append">
@@ -77,6 +127,8 @@ function LoginForm() {
               </div>
             </div>
           </div>
+
+          <LoginErrorMessage visible={loginError} message={loginErrorMessage} />
 
           <button
             className={classNames(

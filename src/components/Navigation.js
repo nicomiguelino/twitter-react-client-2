@@ -1,8 +1,19 @@
 import classNames from 'classnames';
 import { Navbar, Nav } from "react-bootstrap";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearAccessToken } from '../redux/auth/authSlice';
 
 function Navigation() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    dispatch(clearAccessToken());
+    history.push('/login');
+  };
+
   return (
     <Navbar
       bg="success"
@@ -45,7 +56,7 @@ function Navigation() {
             Notifications
           </NavLink>
 
-          <NavLink to="/login" className="nav-link">
+          <NavLink to="/login" className="nav-link" onClick={handleLogout}>
             Log Out
           </NavLink>
         </Nav>

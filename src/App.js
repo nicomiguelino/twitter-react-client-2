@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import {
   BrowserRouter,
@@ -15,8 +16,20 @@ const middot = '\u00b7';
 
 function WorkInProgress({children}) {
   return (
-    <div className="container-fluid d-flex justify-content-center mt-5">
+    <div
+      className={classNames(
+        'container-fluid',
+        'd-flex',
+        'justify-content-center',
+        'align-items-center',
+        'mt-3',
+        'text-muted'
+      )}
+    >
       {children}
+      <h3 className="display-4 ml-2">
+        <i className="bi-cone-striped"></i>
+      </h3>
     </div>
   );
 }
