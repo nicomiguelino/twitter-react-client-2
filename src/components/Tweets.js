@@ -15,16 +15,17 @@ function getProcessedTweet(content) {
 
 function Tweets() {
   const { list, tweetsLoading } = useSelector(state => state.tweets);
+  const { accessToken } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTweets());
-  }, [dispatch]);
+    dispatch(getTweets(accessToken));
+  }, [dispatch, accessToken]);
 
   if (tweetsLoading) {
     return (
       <div class="bg-white text-black-50 text-center">
-          <span className="spinner-border spinner-border-sm">
+          <span className="spinner-border">
           </span>
       </div>
     );
@@ -40,7 +41,7 @@ function Tweets() {
                 {tweet.displayName}
               </span>
               <span className="text-black-50">
-                @{tweet.userName} &middot; {tweet.timeElapsed}
+                @{tweet.username} &middot; {tweet.timeElapsed}
               </span>
             </div>
             <div>

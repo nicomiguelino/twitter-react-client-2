@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiClient } from '../../utilities/clientApi';
+import { apiClient } from '../../utilities/apiClient';
 
 export const maxCharPerTweet = 200;
 
@@ -25,9 +25,13 @@ export const createTweet = createAsyncThunk(
 
 export const getTweets = createAsyncThunk(
   'tweets/get',
-  async (_, thunkAPI) => {
+  async (accessToken, thunkAPI) => {
     try {
-      const response = await apiClient.get('/tweets')
+      const response = await apiClient.get('/tweets', {
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        },
+      })
       return response.data;
     } catch(error) {
       return thunkAPI.rejectWithValue({
