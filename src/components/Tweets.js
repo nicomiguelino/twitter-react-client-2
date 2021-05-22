@@ -19,7 +19,7 @@ function Tweets() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTweets(accessToken));
+    dispatch(getTweets());
   }, [dispatch, accessToken]);
 
   if (tweetsLoading) {

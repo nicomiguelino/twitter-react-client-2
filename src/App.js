@@ -49,7 +49,7 @@ function App() {
 
           <Route>
             <Route exact path="/">
-              <Redirect to="/home" />
+              <Redirect to="/login" />
             </Route>
 
             <Navigation />

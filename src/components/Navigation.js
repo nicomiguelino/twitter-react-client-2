@@ -3,13 +3,19 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { clearAccessToken } from '../redux/auth/authSlice';
+import { apiClient } from '../utilities/apiClient';
 
 function Navigation() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleLogout = (event) => {
+  const handleLogout = async (event) => {
     event.preventDefault();
+
+    await apiClient.post('/logout', {}, {
+      withCredentials: true,
+    });
+
     dispatch(clearAccessToken());
     history.push('/login');
   };
@@ -27,7 +33,7 @@ function Navigation() {
         'px-4',
       )}
     >
-      <Link to="/" className="mr-4 navbar-brand">
+      <Link to="/home" className="mr-4 navbar-brand">
         <strong className="d-block">
           Yet another Twitter clone
         </strong>

@@ -12,28 +12,40 @@ const initialState = {
   list: []
 };
 
+const getCommonApiClientOptions = () => ({
+  withCredentials: true,
+});
+
 export const createTweet = createAsyncThunk(
   'tweets/create',
-  async (tweet) => {
-    const response = await new Promise(resolve =>
-      setTimeout(() => resolve({ data: tweet }), 2000)
-    );
+  async (tweet, thunkAPI) => {
+    try {
+      const postData = {
+        timeElapsed: tweet.timeElapsed,
+        content: tweet.content,
+      };
 
-    return response.data;
+      const response = await apiClient.post(
+        '/tweets', postData, getCommonApiClientOptions());
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({
+        error: error.message
+      });
+    }
   }
 );
 
 export const getTweets = createAsyncThunk(
   'tweets/get',
-  async (accessToken, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const response = await apiClient.get('/tweets', {
-        headers: {
-          authorization: `Bearer ${accessToken}`
-        },
-      })
+      const response = await apiClient.get(
+        '/tweets', getCommonApiClientOptions());
+
       return response.data;
-    } catch(error) {
+    } catch (error) {
       return thunkAPI.rejectWithValue({
         error: error.message
       });
@@ -70,7 +82,7 @@ export const tweetsSlice = createSlice({
       state.tweetsLoading = true;
     },
     [getTweets.fulfilled]: (state, action) => {
-      state.list = [...action.payload];
+      state.list = [...action.payload.slice().reverse()];
       state.tweetsLoading = false;
     }
   }

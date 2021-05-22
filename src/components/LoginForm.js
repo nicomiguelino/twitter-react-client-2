@@ -44,10 +44,12 @@ function LoginForm() {
     event.preventDefault();
 
     try {
-      const response = await apiClient.post('/login', { username, password });
+      const response = await apiClient.post('/login', { username, password }, {
+        withCredentials: true,
+      });
       setLoginError(false);
       dispatch(setAccessToken(response.data.token));
-      history.push('/');
+      history.push('/home');
     } catch(error) {
       setLoginError(true);
       setLoginErrorMessage(error.response.data.message);
