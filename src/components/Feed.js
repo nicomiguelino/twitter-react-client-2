@@ -4,8 +4,8 @@ import CreateTweetForm from './CreateTweetForm';
 
 function Feed() {
   return(
-    <div class="container-md my-5">
-      <div class="row">
+    <div className="container-md my-5">
+      <div className="row">
         <div className="col-12 col-lg-8">
           <CreateTweetForm />
           <Tweets />

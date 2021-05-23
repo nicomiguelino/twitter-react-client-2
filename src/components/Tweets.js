@@ -24,7 +24,7 @@ function Tweets() {
 
   if (tweetsLoading) {
     return (
-      <div class="bg-white text-black-50 text-center">
+      <div className="bg-white text-black-50 text-center">
           <span className="spinner-border">
           </span>
       </div>
@@ -34,7 +34,7 @@ function Tweets() {
   return (
     <>
       {list.map(tweet => (
-        <div className="card bg-white text-black mb-2">
+        <div key={tweet.id} className="card bg-white text-black mb-2">
           <div className="card-body">
             <div className="mb-2">
               <span className="font-weight-bold mr-1">
