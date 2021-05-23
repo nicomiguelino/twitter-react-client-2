@@ -14,7 +14,12 @@ function getProcessedTweet(content) {
 }
 
 function Tweets() {
-  const { list, tweetsLoading } = useSelector(state => state.tweets);
+  const {
+    list,
+    tweetsLoading,
+    tweetsLoadingError,
+    tweetsErrorMessage,
+  } = useSelector(state => state.tweets);
   const { accessToken } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
@@ -27,6 +32,14 @@ function Tweets() {
       <div className="bg-white text-black-50 text-center">
           <span className="spinner-border">
           </span>
+      </div>
+    );
+  }
+
+  if (tweetsLoadingError) {
+    return (
+      <div className="bg-white text-black-50 text-center">
+        {tweetsErrorMessage}
       </div>
     );
   }
