@@ -12,9 +12,7 @@ function Navigation() {
   const handleLogout = async (event) => {
     event.preventDefault();
 
-    await apiClient.post('/logout', {}, {
-      withCredentials: true,
-    });
+    await apiClient.post('/logout');
 
     dispatch(clearAccessToken());
     history.push('/login');

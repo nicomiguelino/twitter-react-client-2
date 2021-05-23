@@ -14,10 +14,6 @@ const initialState = {
   list: [],
 };
 
-const getCommonApiClientOptions = () => ({
-  withCredentials: true,
-});
-
 const getTweetsErrorMessage = (statusCode) => {
   switch (statusCode) {
     case 401:
@@ -36,8 +32,7 @@ export const createTweet = createAsyncThunk(
         content: tweet.content,
       };
 
-      const response = await apiClient.post(
-        '/tweets', postData, getCommonApiClientOptions());
+      const response = await apiClient.post('/tweets', postData);
 
       return response.data;
     } catch (error) {
@@ -52,8 +47,7 @@ export const getTweets = createAsyncThunk(
   'tweets/get',
   async (_, thunkAPI) => {
     try {
-      const response = await apiClient.get(
-        '/tweets', getCommonApiClientOptions());
+      const response = await apiClient.get('/tweets');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
