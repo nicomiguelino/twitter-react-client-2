@@ -17,7 +17,7 @@ function validateTweet(tweet) {
 function Spinner({loading}) {
   if (loading) {
     return (
-      <span class="spinner-border spinner-border-sm ml-2">
+      <span className="spinner-border spinner-border-sm ml-2">
       </span>
     );
   } else {
@@ -70,8 +70,8 @@ function CreateTweetForm() {
             rows="4"
             className="form-control mb-3 p-3"
             style={{
-              'font-size': '1.3em',
-              'resize': 'none'
+              fontSize: '1.3em',
+              resize: 'none'
             }}
             value={inputTweet}
             onChange={handleInputTweet}
