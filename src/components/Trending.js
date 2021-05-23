@@ -9,8 +9,8 @@ function Trending() {
         Trending
       </h5>
 
-      {tags.map(tag => (
-        <div className="text-black-50 font-weight-bold">
+      {tags.map((tag, index) => (
+        <div key={index} className="text-black-50 font-weight-bold">
           #{tag}
         </div>
       ))}

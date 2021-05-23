@@ -9,12 +9,23 @@ const initialState = {
   tweetButtonDisabled: true,
   createTweetLoading: false,
   tweetsLoading: true,
-  list: []
+  tweetsLoadingError: false,
+  tweetsErrorMessage: '',
+  list: [],
 };
 
 const getCommonApiClientOptions = () => ({
   withCredentials: true,
 });
+
+const getTweetsErrorMessage = (statusCode) => {
+  switch (statusCode) {
+    case 401:
+      return 'You don\'t have permissions to view tweets. Try logging in.';
+    default:
+      return 'Something went wrong. Try refreshing.';
+  }
+};
 
 export const createTweet = createAsyncThunk(
   'tweets/create',
@@ -31,7 +42,7 @@ export const createTweet = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -43,11 +54,10 @@ export const getTweets = createAsyncThunk(
     try {
       const response = await apiClient.get(
         '/tweets', getCommonApiClientOptions());
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
-        error: error.message
+        statusCode: error.response.status,
       });
     }
   }
@@ -80,12 +90,23 @@ export const tweetsSlice = createSlice({
     },
     [getTweets.pending]: (state) => {
       state.tweetsLoading = true;
+      state.tweetsLoadingError = false;
+      state.tweetsErrorMessage = '';
     },
     [getTweets.fulfilled]: (state, action) => {
       state.list = [...action.payload.slice().reverse()];
       state.tweetsLoading = false;
-    }
-  }
+      state.tweetsLoadingError = false;
+      state.tweetsErrorMessage = '';
+    },
+    [getTweets.rejected]: (state, action) => {
+      const {statusCode} = action.payload;
+
+      state.tweetsLoading = false;
+      state.tweetsLoadingError = true;
+      state.tweetsErrorMessage = getTweetsErrorMessage(statusCode);
+    },
+  },
 });
 
 export const {
