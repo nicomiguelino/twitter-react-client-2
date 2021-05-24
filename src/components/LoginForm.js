@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import '../styles/LoginForm.scss';
 import { apiClient } from '../utilities/apiClient';
 import { setAccessToken } from '../redux/auth/authSlice';
+import { verifyIfLoggedIn } from '../redux/auth/authSlice';
 
 function LoginErrorMessage({visible, message}) {
   if (visible) {
@@ -47,6 +48,7 @@ function LoginForm() {
       const response = await apiClient.post('/login', { username, password });
       setLoginError(false);
       dispatch(setAccessToken(response.data.token));
+      dispatch(verifyIfLoggedIn());
       history.push('/home');
     } catch(error) {
       setLoginError(true);

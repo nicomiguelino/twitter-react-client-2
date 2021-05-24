@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   BrowserRouter,
   Switch,
@@ -11,6 +12,7 @@ import './App.scss';
 import Feed from './components/Feed';
 import LoginForm from './components/LoginForm';
 import Navigation from './components/Navigation';
+import { verifyIfLoggedIn } from './redux/auth/authSlice';
 
 const middot = '\u00b7';
 
@@ -35,9 +37,12 @@ function WorkInProgress({children}) {
 }
 
 function App() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = `Yet another Twitter clone ${middot}  Home`;
-  }, []);
+    dispatch(verifyIfLoggedIn());
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

@@ -1,9 +1,21 @@
 import classNames from 'classnames';
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearAccessToken } from '../redux/auth/authSlice';
 import { apiClient } from '../utilities/apiClient';
+import { selectAuth } from '../redux/auth/authSlice';
+import { verifyIfLoggedIn } from '../redux/auth/authSlice';
+
+function LoginRequired({ children }) {
+  const {isLoggedIn} = useSelector(selectAuth);
+
+  if (!isLoggedIn) {
+    return <></>;
+  }
+
+  return <>{children}</>;
+}
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -14,6 +26,7 @@ function Navigation() {
 
     await apiClient.post('/logout');
 
+    dispatch(verifyIfLoggedIn());
     dispatch(clearAccessToken());
     history.push('/login');
   };
@@ -60,9 +73,11 @@ function Navigation() {
             Notifications
           </NavLink>
 
-          <NavLink to="/login" className="nav-link" onClick={handleLogout}>
-            Log Out
-          </NavLink>
+          <LoginRequired>
+            <NavLink to="/login" className="nav-link" onClick={handleLogout}>
+              Log Out
+            </NavLink>
+          </LoginRequired>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
