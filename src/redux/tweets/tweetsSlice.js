@@ -84,6 +84,7 @@ export const tweetsSlice = createSlice({
       state.createTweetLoading = false;
       state.inputTweet = '';
       state.charactersLeft = maxCharPerTweet;
+      state.tweetButtonDisabled = true;
     },
     [getTweets.pending]: (state) => {
       state.tweetsLoading = true;

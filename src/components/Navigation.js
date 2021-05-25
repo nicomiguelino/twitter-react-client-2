@@ -74,7 +74,7 @@ function Navigation() {
           </NavLink>
 
           <LoginRequired>
-            <NavLink to="/home" className="nav-link" onClick={handleLogout}>
+            <NavLink to="/login" className="nav-link" onClick={handleLogout}>
               Log Out ({ displayName })
             </NavLink>
           </LoginRequired>
