@@ -54,7 +54,7 @@ function App() {
 
           <Route>
             <Route exact path="/">
-              <Redirect to="/login" />
+              <Redirect to="/home" />
             </Route>
 
             <Navigation />
