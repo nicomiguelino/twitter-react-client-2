@@ -1,9 +1,8 @@
-import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { useEffect } from 'react';
-import {
-  getTweets,
-} from '../redux/tweets/tweetsSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getTweets } from '../redux/tweets/tweetsSlice';
 
 function getProcessedTweet(content) {
   return `${content}`.split('\n').map(line => (
@@ -18,14 +17,13 @@ function Tweets() {
     list,
     tweetsLoading,
     tweetsLoadingError,
-    tweetsErrorMessage,
+    tweetsError,
   } = useSelector(state => state.tweets);
-  const { accessToken } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTweets());
-  }, [dispatch, accessToken]);
+  }, [dispatch]);
 
   if (tweetsLoading) {
     return (
@@ -38,9 +36,34 @@ function Tweets() {
 
   if (tweetsLoadingError) {
     return (
-      <div className="bg-white text-black-50 text-center">
-        {tweetsErrorMessage}
-      </div>
+      <>
+        <div className="bg-white text-black-50 text-center">
+          {tweetsError.message}
+        </div>
+
+        <div className="d-flex justify-content-center">
+          {
+            (tweetsError.statusCode === 401) ?
+              (
+                <Link to="/login"
+                  style={{
+                    borderRadius: '2rem'
+                  }}
+                  className={classNames(
+                    'btn',
+                    'btn-success',
+                    'login-button',
+                    'font-weight-bold',
+                    'mt-3',
+                  )}
+                >
+                  Log In
+                </Link>
+              ) :
+              (<></>)
+          }
+        </div>
+      </>
     );
   }
 

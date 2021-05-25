@@ -8,6 +8,7 @@ import {
   updateCharactersLeft,
   maxCharPerTweet,
 } from '../redux/tweets/tweetsSlice';
+import { selectAuth } from '../redux/auth/authSlice';
 
 function validateTweet(tweet) {
   const trimmedTweet = `${tweet}`.trim();
@@ -35,6 +36,7 @@ function CreateTweetForm() {
     tweetButtonDisabled,
     charactersLeft,
   } = useSelector(state => state.tweets);
+  const { isLoggedIn } = useSelector(selectAuth);
 
   const handleCreateTweet = () => {
     const tweet = {
@@ -75,7 +77,7 @@ function CreateTweetForm() {
             }}
             value={inputTweet}
             onChange={handleInputTweet}
-            disabled={createTweetLoading}
+            disabled={createTweetLoading || !isLoggedIn}
           />
 
           <div

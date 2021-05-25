@@ -10,7 +10,10 @@ const initialState = {
   createTweetLoading: false,
   tweetsLoading: true,
   tweetsLoadingError: false,
-  tweetsErrorMessage: '',
+  tweetsError: {
+    message: null,
+    statusCode: null,
+  },
   list: [],
 };
 
@@ -85,20 +88,24 @@ export const tweetsSlice = createSlice({
     [getTweets.pending]: (state) => {
       state.tweetsLoading = true;
       state.tweetsLoadingError = false;
-      state.tweetsErrorMessage = '';
+      state.tweetsError = initialState.tweetsErro;
     },
     [getTweets.fulfilled]: (state, action) => {
       state.list = [...action.payload.slice().reverse()];
       state.tweetsLoading = false;
       state.tweetsLoadingError = false;
-      state.tweetsErrorMessage = '';
+      state.tweetsError = initialState.tweetsError;
     },
     [getTweets.rejected]: (state, action) => {
       const {statusCode} = action.payload;
 
       state.tweetsLoading = false;
       state.tweetsLoadingError = true;
-      state.tweetsErrorMessage = getTweetsErrorMessage(statusCode);
+
+      state.tweetsError = {
+        statusCode,
+        message: getTweetsErrorMessage(statusCode),
+      };
     },
   },
 });
