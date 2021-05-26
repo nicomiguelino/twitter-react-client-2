@@ -54,7 +54,7 @@ export const getTweets = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
-        statusCode: error.response.status,
+        error: error,
       });
     }
   }
@@ -98,7 +98,8 @@ export const tweetsSlice = createSlice({
       state.tweetsError = initialState.tweetsError;
     },
     [getTweets.rejected]: (state, action) => {
-      const {statusCode} = action.payload;
+      const { error } = action.payload;
+      const statusCode = error.response ? error.response.status : null;
 
       state.tweetsLoading = false;
       state.tweetsLoadingError = true;
