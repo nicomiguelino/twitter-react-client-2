@@ -99,7 +99,7 @@ export const tweetsSlice = createSlice({
     },
     [getTweets.rejected]: (state, action) => {
       const { error } = action.payload;
-      const statusCode = error.response ? error.response.status : null;
+      const statusCode = error.response?.status
 
       state.tweetsLoading = false;
       state.tweetsLoadingError = true;
