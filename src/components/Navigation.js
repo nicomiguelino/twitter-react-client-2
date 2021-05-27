@@ -65,9 +65,11 @@ function Navigation() {
             'mt-lg-0',
           )}
         >
-          <NavLink to="/profile" className="nav-link">
-            Profile
-          </NavLink>
+          <LoginRequired>
+            <NavLink to="/profile" className="nav-link">
+              Profile
+            </NavLink>
+          </LoginRequired>
 
           <LoginRequired>
             <NavLink to="/notifications" className="nav-link">
