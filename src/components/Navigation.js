@@ -69,9 +69,11 @@ function Navigation() {
             Profile
           </NavLink>
 
-          <NavLink to="/notifications" className="nav-link">
-            Notifications
-          </NavLink>
+          <LoginRequired>
+            <NavLink to="/notifications" className="nav-link">
+              Notifications
+            </NavLink>
+          </LoginRequired>
 
           <LoginRequired>
             <NavLink to="/login" className="nav-link" onClick={handleLogout}>
