@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -13,8 +14,7 @@ import Feed from './components/Feed';
 import LoginForm from './components/LoginForm';
 import Navigation from './components/Navigation';
 import { verifyIfLoggedIn } from './redux/auth/authSlice';
-
-const middot = '\u00b7';
+import { getTitle } from './utilities/constants';
 
 function WorkInProgress({children}) {
   return (
@@ -40,43 +40,60 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = `Yet another Twitter clone ${middot}  Home`;
     dispatch(verifyIfLoggedIn());
   }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route path="/login">
-            <LoginForm />
-          </Route>
+      <HelmetProvider>
+        <div className="App">
+          <Helmet>
+            <title>{getTitle('Home')}</title>
+          </Helmet>
 
-          <Route>
-            <Route exact path="/">
-              <Redirect to="/home" />
+          <Switch>
+            <Route path="/login">
+              <Helmet>
+                <title>{getTitle('Login')}</title>
+              </Helmet>
+
+              <LoginForm />
             </Route>
 
-            <Navigation />
+            <Route>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
 
-            <Route path="/home">
-              <Feed />
-            </Route>
+              <Navigation />
 
-            <Route path="/profile">
-              <WorkInProgress>
-                <h3>Profile page is still a work in progress.</h3>
-              </WorkInProgress>
-            </Route>
+              <Route path="/home">
+                <Feed />
+              </Route>
 
-            <Route path="/notifications">
-              <WorkInProgress>
-                <h3>Notifications page is still a work in progress.</h3>
-              </WorkInProgress>
+              <Route path="/profile">
+                <Helmet>
+                  <title>{getTitle('Profile')}</title>
+                </Helmet>
+
+                <WorkInProgress>
+                  <h3>Profile page is still a work in progress.</h3>
+                </WorkInProgress>
+              </Route>
+
+              <Route path="/notifications">
+                <Helmet>
+                  <title>{getTitle('Notifications')}</title>
+                </Helmet>
+
+                <WorkInProgress>
+                  <h3>Notifications page is still a work in progress.</h3>
+                </WorkInProgress>
+              </Route>
             </Route>
-          </Route>
-        </Switch>
-      </div>
+          </Switch>
+        </div>
+      </HelmetProvider>
     </BrowserRouter>
   );
 }
