@@ -2,9 +2,10 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import '../styles/LoginForm.scss';
-import { apiClient } from '../utilities/apiClient';
-import { verifyIfLoggedIn } from '../redux/auth/authSlice';
+
+import 'styles/LoginForm.scss';
+import { apiClient } from 'utilities/apiClient';
+import { verifyIfLoggedIn } from 'redux/auth/authSlice';
 
 function LoginErrorMessage({visible, message}) {
   if (visible) {

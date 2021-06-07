@@ -1,14 +1,15 @@
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import '../styles/CreateTweetForm.scss';
+
+import 'styles/CreateTweetForm.scss';
 import {
   createTweet,
   setInputTweet,
   setTweetButtonDisabled,
   updateCharactersLeft,
   maxCharPerTweet,
-} from '../redux/tweets/tweetsSlice';
-import { selectAuth } from '../redux/auth/authSlice';
+} from 'redux/tweets/tweetsSlice';
+import { selectAuth } from 'redux/auth/authSlice';
 
 function validateTweet(tweet) {
   const trimmedTweet = `${tweet}`.trim();

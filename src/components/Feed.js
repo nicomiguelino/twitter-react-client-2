@@ -1,6 +1,6 @@
-import Tweets from './Tweets';
-import Trending from './Trending';
-import CreateTweetForm from './CreateTweetForm';
+import Tweets from 'components/Tweets';
+import Trending from 'components/Trending';
+import CreateTweetForm from 'components/CreateTweetForm';
 
 function Feed() {
   return(

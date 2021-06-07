@@ -2,9 +2,10 @@ import classNames from 'classnames';
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiClient } from '../utilities/apiClient';
-import { selectAuth } from '../redux/auth/authSlice';
-import { verifyIfLoggedIn } from '../redux/auth/authSlice';
+
+import { apiClient } from 'utilities/apiClient';
+import { selectAuth } from 'redux/auth/authSlice';
+import { verifyIfLoggedIn } from 'redux/auth/authSlice';
 
 function LoginRequired({ children }) {
   const { isLoggedIn } = useSelector(selectAuth);
