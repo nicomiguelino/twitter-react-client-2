@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiClient } from '../../utilities/apiClient';
+
+import { apiClient } from 'utilities/apiClient';
 
 export const maxCharPerTweet = 200;
 

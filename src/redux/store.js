@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tweetsReducer from './tweets/tweetsSlice.js';
-import trendingTagsReducer from './trending/trendingTagsSlice';
-import authReducer from './auth/authSlice';
+
+import tweetsReducer from 'redux/tweets/tweetsSlice.js';
+import trendingTagsReducer from 'redux/trending/trendingTagsSlice';
+import authReducer from 'redux/auth/authSlice';
 
 export default configureStore({
   reducer: {

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './index.scss';
+import 'index.scss';
 
-import App from './App';
-import store from './redux/store';
+import App from 'App';
+import store from 'redux/store';
 import { Provider } from 'react-redux';
 
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from 'serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>

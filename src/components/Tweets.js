@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getTweets } from '../redux/tweets/tweetsSlice';
+
+import { getTweets } from 'redux/tweets/tweetsSlice';
 
 function getProcessedTweet(content) {
   return `${content}`.split('\n').map(line => (

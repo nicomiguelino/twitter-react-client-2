@@ -9,12 +9,12 @@ import {
   Route,
 } from 'react-router-dom';
 
-import './App.scss';
-import Feed from './components/Feed';
-import LoginForm from './components/LoginForm';
-import Navigation from './components/Navigation';
-import { verifyIfLoggedIn } from './redux/auth/authSlice';
-import { getTitle } from './utilities/constants';
+import 'App.scss';
+import Feed from 'components/Feed';
+import LoginForm from 'components/LoginForm';
+import Navigation from 'components/Navigation';
+import { verifyIfLoggedIn } from 'redux/auth/authSlice';
+import { getTitle } from 'utilities/constants';
 
 function WorkInProgress({children}) {
   return (
