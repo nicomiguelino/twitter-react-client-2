@@ -16,7 +16,11 @@ import Navigation from 'components/Navigation';
 import { verifyIfLoggedIn } from 'redux/auth/authSlice';
 import { getTitle } from 'utilities/constants';
 
-function WorkInProgress({children}) {
+interface Props {
+  children: any;
+}
+
+function WorkInProgress({children}: Props): any {
   return (
     <div
       className={classNames(
@@ -36,7 +40,7 @@ function WorkInProgress({children}) {
   );
 }
 
-function App() {
+function App(): any {
   const dispatch = useDispatch();
 
   useEffect(() => {
