@@ -1,9 +1,6 @@
+import { gql, useQuery } from '@apollo/client';
 import classNames from 'classnames';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { getTweets } from 'redux/tweets/tweetsSlice';
 
 function getProcessedTweet(content) {
   return `${content}`.split('\n').map(line => (
@@ -14,19 +11,25 @@ function getProcessedTweet(content) {
 }
 
 function Tweets() {
-  const {
-    list,
-    tweetsLoading,
-    tweetsLoadingError,
-    tweetsError,
-  } = useSelector(state => state.tweets);
-  const dispatch = useDispatch();
+  const GET_TWEETS = gql`
+    query {
+      allTweets {
+        id
+        content
+        createdAt
+        updatedAt
+        user {
+          username
+          firstName
+          lastName
+        }
+      }
+    }
+  `;
 
-  useEffect(() => {
-    dispatch(getTweets());
-  }, [dispatch]);
+  const { loading, error, data } = useQuery(GET_TWEETS);
 
-  if (tweetsLoading) {
+  if (loading) {
     return (
       <div className="bg-white text-black-50 text-center">
           <span className="spinner-border">
@@ -35,16 +38,16 @@ function Tweets() {
     );
   }
 
-  if (tweetsLoadingError) {
+  if (error) {
     return (
       <>
         <div className="bg-white text-black-50 text-center">
-          {tweetsError.message}
+          {error.message}
         </div>
 
         <div className="d-flex justify-content-center">
           {
-            (tweetsError.statusCode === 401) ?
+            (error.statusCode === 401) ?
               (
                 <Link to="/login"
                   style={{
@@ -70,15 +73,15 @@ function Tweets() {
 
   return (
     <>
-      {list.map(tweet => (
+      {data.allTweets.map(tweet => (
         <div key={tweet.id} className="card bg-white text-black mb-2">
           <div className="card-body">
             <div className="mb-2">
               <span className="font-weight-bold mr-1">
-                {tweet.displayName}
+                {tweet.user.firstName} {tweet.user.lastName}
               </span>
               <span className="text-black-50">
-                @{tweet.username} &middot; {tweet.timeElapsed}
+                @{tweet.user.username} &middot; Oct 29
               </span>
             </div>
             <div>
