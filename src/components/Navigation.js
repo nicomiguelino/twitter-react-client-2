@@ -52,9 +52,11 @@ function Navigation() {
         <small className="d-block">It's like Twitter, but green.</small>
       </Link>
 
-      <Navbar.Toggle
-        aria-controls="basic-navbar-nav"
-      />
+      <LoginRequired>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+        />
+      </LoginRequired>
 
       <Navbar.Collapse
         id="basic-navbar-nav"

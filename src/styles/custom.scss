@@ -23,3 +23,13 @@ $theme-colors: (
     border-color: #1cc88a;
   }
 }
+
+@mixin selection {
+  ::-moz-selection { @content; }
+  ::selection { @content; }
+}
+
+@include selection {
+  color: white;
+  background: rgba(28, 200, 138, 0.8);
+}
