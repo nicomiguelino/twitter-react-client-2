@@ -1,6 +1,6 @@
 # Twitter Clone #2
 
-This repo is copied from https://github.com/nicomiguelino/twitter-rails-api,
+This repo is copied from https://github.com/nicomiguelino/twitter-react-client-1,
 specifically on [this commit][2].
 
 
